@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MQApi.Web.Data;
+using MQApi.Web.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,10 @@ builder.Services.AddDbContext<WebApiWalksDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("MQApi"));
 }
 );
+
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
