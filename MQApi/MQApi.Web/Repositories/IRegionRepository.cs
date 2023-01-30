@@ -7,6 +7,6 @@ namespace MQApi.Web.Repositories
         //IEnumerable<Region> GetAll();
 
         //We are changing its name to asynchronous
-        IEnumerable<Region> GetAllAsync();
+       Task <IEnumerable<Region>> GetAllAsync();
     }
 }

@@ -15,8 +15,7 @@ namespace MQApi.Web.Repositories
 
 		//public IEnumerable<Region> GetAll()
 		//{
-		//	//formaking it asynchronously
-		//	return webapiwalk.Regions.ToListAsync();
+		//	
 		//	// return webapiwalk.Regions.ToList();
 
 		//}
@@ -30,9 +29,6 @@ namespace MQApi.Web.Repositories
 
         }
 
-		IEnumerable<Region> IRegionRepository.GetAllAsync()
-		{
-			throw new NotImplementedException();
-		}
+		
 	}
 }
