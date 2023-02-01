@@ -10,7 +10,7 @@ namespace MQApi.Web.Data
 		public WebApiWalksDbContext(DbContextOptions<WebApiWalksDbContext> options):base(options)
 
 		{
-	 
+	      
 
 		}
 
