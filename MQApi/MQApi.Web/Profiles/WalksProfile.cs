@@ -12,7 +12,7 @@ namespace MQApi.Web.Profiles
             //Here by mistake I have wrote Domain instead of DTO so giving error 500
             CreateMap<Model.Domain.Walk, Model.DTO.Walk>().ReverseMap();
 
-            CreateMap<Model.Domain.WalkDifficulty, Model.DTO.WalkDifficulty>().ReverseMap();
+          //  CreateMap<Model.Domain.WalkDifficulty, Model.DTO.WalkDifficulty>().ReverseMap();
         }
 
        

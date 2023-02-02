@@ -13,5 +13,7 @@ namespace MQApi.Web.Repositories
         Task<Walk> UpdateWalkAsync(Guid id, Walk walk);
 
         Task<Walk> DeleteAsync(Guid id);
+
+
     }
 }

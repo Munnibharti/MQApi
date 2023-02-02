@@ -1,9 +1,7 @@
 ﻿namespace MQApi.Web.Model.DTO
 {
-    public class WalkDifficulty
+    public class updateWalkDifficultyRequest
     {
-
-        public Guid Id { get; set; }
         public string Code { get; set; }
     }
 }

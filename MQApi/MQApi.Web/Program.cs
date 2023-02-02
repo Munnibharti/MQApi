@@ -25,6 +25,7 @@ options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoop
 
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<IWalkRepositroy, WalkRepository> ();
+builder.Services.AddScoped<_IWalkDifficultyRepository, WalkDifficultyRepo>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
