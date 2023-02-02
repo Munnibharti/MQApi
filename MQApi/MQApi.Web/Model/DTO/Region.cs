@@ -20,6 +20,6 @@ namespace MQApi.Web.Model.DTO
 
         //This is navigation 
         //here one region can have multiple walks
-        public IEnumerable<Walk> Walks { get; set; }
+        public IEnumerable<Domain.Walk> Walks { get; set; }
     }
 }

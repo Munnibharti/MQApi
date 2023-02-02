@@ -9,6 +9,7 @@ namespace MQApi.Web.Repositories
 
         //We are changing its name to asynchronous
        Task <IEnumerable<Region>> GetAllAsync();
+        //After this goes to RegionRepository class
 
         Task<Region> GetAsync(Guid id);
 

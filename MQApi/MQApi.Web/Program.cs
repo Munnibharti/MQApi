@@ -17,7 +17,14 @@ builder.Services.AddDbContext<WebApiWalksDbContext>(options =>
 }
 );
 
+//This is necessary for navigation proprerty
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+
+
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddScoped<IWalkRepositroy, WalkRepository> ();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
