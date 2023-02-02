@@ -61,6 +61,13 @@ namespace MQApi.Web.Controllers
 
         public async Task<IActionResult> AddRegionAsync(Model.DTO.AddRegionRequest addRegionRequest)
         {
+            //Validate the Request
+           if(!ValidateAddRegionAsync(addRegionRequest))
+            {
+                return BadRequest(ModelState);
+            }
+
+
             // first convert Request(DTO) to domain model
             var region = new Model.Domain.Region()
             {
@@ -137,6 +144,13 @@ namespace MQApi.Web.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> UpdateRegionAsync([FromRoute]Guid id,[FromBody]Model.DTO.UpdateRegionRequest updateRegionRequest)
         {
+            //validate Request
+            //Validate the Request
+            if (!ValidateUpdateAsync(updateRegionRequest))
+            {
+                return BadRequest(ModelState);
+            }
+
             //first convert DTO Request to Domain
             // first convert Request(DTO) to domain model
             var region = new Model.Domain.Region()
@@ -181,5 +195,105 @@ namespace MQApi.Web.Controllers
             return Ok(regionDTO);
         }
 
-	}
+        #region Private method
+
+        private bool ValidateAddRegionAsync(Model.DTO.AddRegionRequest addRegionRequest)
+        {
+            if(addRegionRequest == null)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest),
+                    $"Add region Data is required.");
+
+                return false;
+
+            }
+
+            if(string.IsNullOrWhiteSpace(addRegionRequest.Code))
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Code),
+
+                   $"{nameof(addRegionRequest.Code)} cannot be null or empty or white space " +
+                   $"it must be filled.");
+            }
+
+            if (string.IsNullOrWhiteSpace(addRegionRequest.Name))
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Name),
+
+                   $"{nameof(addRegionRequest.Name)} cannot be null or empty or white space " +
+                   $"it must be filled.");
+            }
+
+            if (addRegionRequest.Area <= 0)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Area),
+
+                   $"{nameof(addRegionRequest.Area)} Area must be greater than 0");
+            }
+        
+
+          if(ModelState.ErrorCount>0)
+            {
+                return false;
+            }
+            return true;
+        }
+        #endregion
+        #region Private method
+        private bool ValidateUpdateAsync(Model.DTO.UpdateRegionRequest updateRegionRequest)
+        {
+            if (updateRegionRequest == null)
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest),
+                    $"Add region Data is required.");
+
+                return false;
+
+            }
+
+            if (string.IsNullOrWhiteSpace(updateRegionRequest.Code))
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest.Code),
+
+                   $"{nameof(updateRegionRequest.Code)} cannot be null or empty or white space " +
+                   $"it must be filled.");
+            }
+
+            if (string.IsNullOrWhiteSpace(updateRegionRequest.Name))
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest.Name),
+
+                   $"{nameof(updateRegionRequest.Name)} cannot be null or empty or white space " +
+                   $"it must be filled.");
+            }
+
+            if (updateRegionRequest.Area <= 0)
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest.Area),
+
+                   $"{nameof(updateRegionRequest.Area)} Area must be greater than 0");
+            }
+           
+
+            if (updateRegionRequest.Population <= 0)
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest.Population),
+
+                   $"{nameof(updateRegionRequest.Population)} Logitude must be greater than 0 or positive");
+            }
+
+            if (ModelState.ErrorCount > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+         #endregion
+    }
+
+
+
+
+
 }
+
