@@ -61,11 +61,11 @@ namespace MQApi.Web.Controllers
 
         public async Task<IActionResult> AddRegionAsync(Model.DTO.AddRegionRequest addRegionRequest)
         {
-            //Validate the Request
-           if(!ValidateAddRegionAsync(addRegionRequest))
-            {
-                return BadRequest(ModelState);
-            }
+           // //Validate the Request
+           //if(!ValidateAddRegionAsync(addRegionRequest))
+           // {
+           //     return BadRequest(ModelState);
+           // }
 
 
             // first convert Request(DTO) to domain model
@@ -144,12 +144,12 @@ namespace MQApi.Web.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> UpdateRegionAsync([FromRoute]Guid id,[FromBody]Model.DTO.UpdateRegionRequest updateRegionRequest)
         {
-            //validate Request
-            //Validate the Request
-            if (!ValidateUpdateAsync(updateRegionRequest))
-            {
-                return BadRequest(ModelState);
-            }
+            ////validate Request
+            ////Validate the Request
+            //if (!ValidateUpdateAsync(updateRegionRequest))
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             //first convert DTO Request to Domain
             // first convert Request(DTO) to domain model

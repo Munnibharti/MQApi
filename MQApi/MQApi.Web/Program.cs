@@ -1,6 +1,8 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using MQApi.Web.Data;
 using MQApi.Web.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//This is for Api fluent validation
+builder.Services.
+	AddFluentValidation(option => option.RegisterValidatorsFromAssemblyContaining<Program>());
 
 builder.Services.AddDbContext<WebApiWalksDbContext>(options =>
 {
