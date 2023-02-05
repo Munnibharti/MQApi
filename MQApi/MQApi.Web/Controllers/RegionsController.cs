@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using MQApi.Web.Model.Domain;
@@ -9,6 +10,8 @@ namespace MQApi.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+   // [Authorize]
+    //The authorize attribute means the client must have valid token to access this
     public class RegionsController : Controller
     {
         private readonly IRegionRepository _regionRepository;
@@ -24,6 +27,9 @@ namespace MQApi.Web.Controllers
 
 
         [HttpGet]
+        //[Authorize]
+        [Authorize(Roles ="reader")]
+
         public async Task<IActionResult> GetAllRegionsAsync()
         {
             //This is fetching from database
@@ -43,6 +49,8 @@ namespace MQApi.Web.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetRegionAsync")]
+        [Authorize]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetRegionAsync(Guid id)
         {
             var regionm = await _regionRepository.GetAsync(id);
@@ -58,7 +66,8 @@ namespace MQApi.Web.Controllers
         }
 
         [HttpPost]
-
+        [Authorize]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> AddRegionAsync(Model.DTO.AddRegionRequest addRegionRequest)
         {
            // //Validate the Request
@@ -107,6 +116,8 @@ namespace MQApi.Web.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+     //   [Authorize]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> DeleteRegionAsync(Guid id)
         {
             //Get region from database 
@@ -142,6 +153,8 @@ namespace MQApi.Web.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        // [Authorize]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> UpdateRegionAsync([FromRoute]Guid id,[FromBody]Model.DTO.UpdateRegionRequest updateRegionRequest)
         {
             ////validate Request

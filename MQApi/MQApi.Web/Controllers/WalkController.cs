@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MQApi.Web.Repositories;
+using System.Data;
 using System.Xml.Linq;
 
 namespace MQApi.Web.Controllers
@@ -21,6 +23,8 @@ namespace MQApi.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "reader")]
+
         public async Task<IActionResult> GetAllWalksAsync()
         {
             //This is fetching from database
@@ -41,6 +45,8 @@ namespace MQApi.Web.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetWalkAsync")]
+        [Authorize(Roles = "reader")]
+
         public async Task<IActionResult> GetWalkAsync(Guid id)
         {
             // getting walkm data from database
@@ -59,6 +65,8 @@ namespace MQApi.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "writer")]
+
 
         //Here I was getting Loading Api Failed because i have written AddRegionAsync instead of AddWalkasync
         public async Task<IActionResult> AddWalkAsync([FromBody]Model.DTO.AddWalkRequest addWalkRequest)
@@ -97,6 +105,8 @@ namespace MQApi.Web.Controllers
         }
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "writer")]
+
         public async Task<IActionResult> UpdateWalkAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateWalkRequest updateWalkRequest)
         {
             //first convert DTO Request to Domain
@@ -139,6 +149,8 @@ namespace MQApi.Web.Controllers
         }
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "writer")]
+
         public async Task<IActionResult> DeleteWalkAsync(Guid id)
         {
             //Get region from database 

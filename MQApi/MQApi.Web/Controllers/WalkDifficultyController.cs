@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MQApi.Web.Model.DTO;
 using MQApi.Web.Repositories;
+using System.Data;
 
 namespace MQApi.Web.Controllers
 {
@@ -20,6 +22,8 @@ namespace MQApi.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "reader")]
+
         public async Task<IActionResult> GetAllWalkDiffsAsync()
         {
             //This is fetching from database
@@ -39,6 +43,8 @@ namespace MQApi.Web.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetWalkDiffAsync")]
+        [Authorize(Roles = "reader")]
+
         public async Task<IActionResult> GetWalkDiffAsync(Guid id)
         {
             // getting walkm data from database
@@ -57,6 +63,8 @@ namespace MQApi.Web.Controllers
             return Ok(walkdiffDTO);
         }
         [HttpPost]
+        [Authorize(Roles = "writer")]
+
         public async Task<IActionResult> AddWalkAsync([FromBody] Model.DTO.AddDifficultyWalkRequest addWalkRequest)
         {
             // first convert Request(DTO) to domain model
@@ -88,6 +96,8 @@ namespace MQApi.Web.Controllers
         }
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "writer")]
+
         public async Task<IActionResult> DeleteRegionAsync(Guid id)
         {
             //Get region from database 
@@ -118,6 +128,8 @@ namespace MQApi.Web.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "writer")]
+
         public async Task<IActionResult> UpdateRegionAsync([FromRoute] Guid id, [FromBody] Model.DTO.updateWalkDifficultyRequest updatewalkdiffRequest)
         {
             //first convert DTO Request to Domain
