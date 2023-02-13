@@ -19,7 +19,7 @@ namespace HotelManagementProjectfeb.Data
 
         public DbSet<Inventory> Inventories { get; set; }
 
-        public DbSet<Department> Department { get; set; }
+      
 
         public DbSet<Bill> Bills { get; set; }
 

@@ -13,18 +13,9 @@ namespace HotelManagementProjectfeb.Model.Domain
 
         public double salary { get; set; }
 
-        public Guid department_id { get; set; }
-        //navigation property
-        public List<Department> Departments { get; set; }
+       
+       
 
-        public Guid Room_id { get; set; }
-
-        //navigation property
-        public List<Room> Rooms { get; set; }
-
-        public Guid Receptionist_id { get; set; }
-
-        public List<Receptionist> Receptionist { get; set; }
-
-    }
+        
+ }
 }

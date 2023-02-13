@@ -20,10 +20,18 @@ namespace HotelManagementProjectfeb.Model.Domain
 
         public int no_of_nights { get; set; }
 
-        [ForeignKey("Guest")]
+       
         public Guid Guest_Id { get; set; }
 
-        public Guest Guest { get; set; }
+        public List<Guest> Guest { get; set; }
+
+        public Guid Room_id { get; set; }
+
+        public List<Room> Rooms { get; set; }   
+
+
+        public Guid Receptionist_id { get; set; }
+        public List<Receptionist> Receptionists { get; set; }
         
 
     }
