@@ -10,7 +10,7 @@ namespace PaymentDetails.Model
         [Column(TypeName ="nvarchar(100)")]
         public string CardOwnerName { get; set; }
 
-        [Column(TypeName = "nvarchar(16")]
+        [Column(TypeName = "nvarchar(16)")]
         public string CardNumber { get; set; }
 
         [Column(TypeName = "nvarchar(5)")]

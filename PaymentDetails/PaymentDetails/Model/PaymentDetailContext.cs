@@ -8,6 +8,9 @@ namespace PaymentDetails.Model
         public PaymentDetailContext(DbContextOptions<PaymentDetailContext> options):base(options)
         {
 
+
         }
+        public DbSet<PaymentDetail> PaymentDetails { get; set; }
+
     }
 }
