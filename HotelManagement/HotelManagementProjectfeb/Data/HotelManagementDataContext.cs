@@ -1,4 +1,4 @@
-﻿using HotelManagementProjectfeb.Model;
+﻿using HotelManagementProjectfeb.Model.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagementProjectfeb.Data

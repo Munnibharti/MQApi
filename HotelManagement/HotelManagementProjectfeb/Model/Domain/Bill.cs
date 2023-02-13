@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HotelManagementProjectfeb.Model
+namespace HotelManagementProjectfeb.Model.Domain
 {
     public class Bill
     {
-        [Display]
+        [Key]
         public Guid Bill_id { get; set; }
 
         public int stay_dates { get; set; }

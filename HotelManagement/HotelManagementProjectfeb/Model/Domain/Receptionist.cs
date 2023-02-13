@@ -1,9 +1,12 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
-namespace HotelManagementProjectfeb.Model
+namespace HotelManagementProjectfeb.Model.Domain
 {
     public class Receptionist
     {
+        [Key]
         public Guid Receptionist_Id { get; set; }
 
         public string Password { get; set; }
@@ -18,6 +21,7 @@ namespace HotelManagementProjectfeb.Model
         //navigation property
         public List<Reservation> Reservations { get; set; }
 
+        [ForeignKey("Department")]
         public Guid Department_Id { get; set; }
 
         //navigation property
@@ -29,15 +33,16 @@ namespace HotelManagementProjectfeb.Model
 
         public Guid room_id { get; set; }
 
-        public List<Room> room { get; set; }  
+        public List<Room> room { get; set; }
 
+        [ForeignKey("Bill")]
         public Guid bill_id { get; set; }
 
-        public Bill Bill { get; set; }  
+        public Bill Bill { get; set; }
 
 
-           
-        
+
+
 
 
 

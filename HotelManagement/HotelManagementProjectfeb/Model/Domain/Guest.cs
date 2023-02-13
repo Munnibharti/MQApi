@@ -1,7 +1,11 @@
-﻿namespace HotelManagementProjectfeb.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HotelManagementProjectfeb.Model.Domain
 {
     public class Guest
     {
+        [Key]
+
         public Guid Guest_id { get; set; }
 
         public string E_mail { get; set; }

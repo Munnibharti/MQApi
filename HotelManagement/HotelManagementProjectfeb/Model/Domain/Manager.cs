@@ -1,7 +1,10 @@
-﻿namespace HotelManagementProjectfeb.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HotelManagementProjectfeb.Model.Domain
 {
     public class Manager
     {
+        [Key]
         public Guid manager_id { get; set; }
 
         public string manager_name { get; set; }
@@ -11,9 +14,9 @@
         public double salary { get; set; }
 
         public Guid department_id { get; set; }
+        //navigation property
+        public List<Department> Departments { get; set; }
 
-        public Department Department { get; set; }
-        
         public Guid Room_id { get; set; }
 
         //navigation property
