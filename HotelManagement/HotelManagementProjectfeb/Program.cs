@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//DTO  full form data transfer eobject
+
 // Add services to the container.
 
 builder.Services.AddControllers();

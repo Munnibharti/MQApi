@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagementProjectfeb.Controllers
 {
+    [ApiController]
+    [Route("Bill")]
     public class BillController : Controller
     {
         private readonly IBillRepository _billRepository;
