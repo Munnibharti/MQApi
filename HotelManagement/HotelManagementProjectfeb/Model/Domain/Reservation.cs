@@ -23,7 +23,7 @@ namespace HotelManagementProjectfeb.Model.Domain
        
         public Guid Guest_Id { get; set; }
 
-        public List<Guest> Guest { get; set; }
+        public List<Guest> Guests { get; set; }
 
         public Guid Room_id { get; set; }
 

@@ -9,7 +9,7 @@ namespace HotelManagementProjectfeb.Data
         {
 
         }
-        public DbSet<Reservation> Reservation { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         public DbSet<Manager> Managers { get; set; }
 
