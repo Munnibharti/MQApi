@@ -1,6 +1,15 @@
-﻿namespace HotelManagementProjectfeb.Validators
+﻿using FluentValidation;
+
+namespace HotelManagementProjectfeb.Validators
 {
-    public class UpdateRoomRequestValidator
+    public class UpdateRoomRequestValidator : AbstractValidator<Model.DTO.UpdateRoomRequest>
     {
+        public UpdateRoomRequestValidator()
+        {
+            RuleFor(x => x.room_rate).NotEmpty();
+
+            RuleFor(x => x.room_status).NotEmpty();
+
+        }
     }
 }

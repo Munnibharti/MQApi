@@ -32,6 +32,18 @@ options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoop
 
 builder.Services.AddScoped<IGuestRepository, GuestRepository>();
 
+builder.Services.AddScoped<IBillRepository, BillRepository>();
+
+builder.Services.AddScoped<IReservationRepository,ReservationRepository>();
+
+builder.Services.AddScoped<IReceptionistRepositories, ReceptionistRepository>();
+
+builder.Services.AddScoped<IRoomRepository,RoomRepository>();
+
+builder.Services.AddScoped<IInventoryRepositorycs, InventoryRepository>();
+
+builder.Services.AddScoped<IManagerRepository, ManagerRepository>();
+
 //here dependency injection
 
 //here automapper

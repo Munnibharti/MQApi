@@ -9,6 +9,7 @@ namespace HotelManagementProjectfeb.Validators
             RuleFor(x => x.room_rate).NotEmpty();
 
             RuleFor(x=>x.room_status).NotEmpty();
+
         }
     }
 }
