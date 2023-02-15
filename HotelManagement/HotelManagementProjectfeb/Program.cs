@@ -1,4 +1,6 @@
+using FluentValidation.AspNetCore;
 using HotelManagementProjectfeb.Data;
+using HotelManagementProjectfeb.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,12 +14,28 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//for fluent validation dome by uma
+builder.Services.AddFluentValidation(option => option.RegisterValidatorsFromAssemblyContaining<Program>());
+
 
 builder.Services.AddDbContext<HotelManagementDataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 });
+
+//This is necessary for navigation proprerty
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+
+
+builder.Services.AddScoped<IGuestRepository, GuestRepository>();
+
+//here dependency injection
+
+//here automapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 var app = builder.Build();

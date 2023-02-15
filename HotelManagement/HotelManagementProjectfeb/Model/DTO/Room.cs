@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HotelManagementProjectfeb.Model.Domain
+namespace HotelManagementProjectfeb.Model.DTO
 {
     public class Room
     {
@@ -9,8 +9,6 @@ namespace HotelManagementProjectfeb.Model.Domain
 
         public double room_rate { get; set; }
 
-        public bool room_status  { get; set; }
-
-       
+        public bool room_status { get; set; }
     }
 }
