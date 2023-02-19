@@ -18,5 +18,7 @@
         public Guid Guest_Id { get; set; }
 
         public Guid Room_id { get; set; }
+
+        public Guid Recetionist_id { get; set; }
     }
 }

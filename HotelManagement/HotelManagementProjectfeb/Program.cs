@@ -34,11 +34,11 @@ builder.Services.AddScoped<IGuestRepository, GuestRepository>();
 
 builder.Services.AddScoped<IBillRepository, BillRepository>();
 
-builder.Services.AddScoped<IReservationRepository,ReservationRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 builder.Services.AddScoped<IReceptionistRepositories, ReceptionistRepository>();
 
-builder.Services.AddScoped<IRoomRepository,RoomRepository>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 builder.Services.AddScoped<IInventoryRepositorycs, InventoryRepository>();
 
@@ -47,6 +47,7 @@ builder.Services.AddScoped<IManagerRepository, ManagerRepository>();
 //here dependency injection
 
 //here automapper
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
@@ -57,9 +58,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+       
 }
 
 app.UseHttpsRedirection();
+//its means allowing api to talk to 
+
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
 
 app.UseAuthorization();
 

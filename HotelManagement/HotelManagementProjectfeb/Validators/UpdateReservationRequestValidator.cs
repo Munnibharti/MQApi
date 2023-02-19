@@ -22,6 +22,8 @@ namespace HotelManagementProjectfeb.Validators
 
             RuleFor(x => x.Room_id).NotEmpty();
 
+            RuleFor(x => x.Receptionist_id).NotEmpty();
+
         }
     }
 }

@@ -8,7 +8,9 @@ using System.Data;
 
 namespace HotelManagementProjectfeb.Controllers
 {
+  
     [ApiController]
+
     [Route("Guest")]
     public class GuestController : Controller
     {
@@ -37,19 +39,34 @@ namespace HotelManagementProjectfeb.Controllers
         //[Authorize]
         // [Authorize(Roles = "reader")]
 
+      
         public async Task<IActionResult> GetAllGuestAsync()
         {
             var guest = await _guestRepository.GetAllAsync();
 
             //BY using Auto MApper
+            //by 
+            //  var guestsDTO = Mapper.Map<List<Model.DTO.Guest>>(guest);
+            var guestsDTO = new List<GuestDTO>();
+            foreach (var item in guest)
+            {
 
-            var guestsDTO = Mapper.Map<List<Model.DTO.Guest>>(guest);
+                var temp = new GuestDTO();
+                temp.Guest_id = item.Guest_id.ToString();
+                temp.E_mail = item.E_mail;
+                temp.Address = item.Address;
+                temp.Gender = item.Gender;
+                temp.Phone_number = item.Phone_number;
+                guestsDTO.Add(temp);
+            }
+                
+            
 
             return Ok(guestsDTO);
         }
 
         [HttpGet]
-        [Route("{id:guid}")]
+        [Route("{id:Guid}")]
         [ActionName("GetGuestAsync")]
         //[Authorize]
         //[Authorize(Roles = "reader")]
@@ -104,6 +121,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+        [ActionName("DeleteGuestAsync")]
         //   [Authorize]
         //  [Authorize(Roles = "writer")]
         public async Task<IActionResult> DeleteGuestAsync(Guid id)
@@ -135,6 +153,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [ActionName("UpdateGuestAsync")]
         // [Authorize]
         //  [Authorize(Roles = "writer")]
         public async Task<IActionResult> UpdateGuestAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateGuestRequest updateguestRequest)

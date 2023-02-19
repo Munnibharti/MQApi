@@ -19,8 +19,6 @@ namespace HotelManagementProjectfeb.Data
 
         public DbSet<Inventory> Inventories { get; set; }
 
-      
-
         public DbSet<Bill> Bills { get; set; }
 
         public DbSet<Guest> Guests { get; set; } 

@@ -4,6 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagementProjectfeb.Controllers
 {
+
+    //    public class ManagerController : Controller
+    //    {
+    //        public IActionResult Index()
+    //        {
+    //            return View();
+    //        }
+    //    }
+
+    //}
+
     [ApiController]
     [Route("Manager")]
     public class ManagerController : Controller
@@ -64,17 +75,17 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpPost]
         //[Authorize]
         //[Authorize(Roles = "writer")]
-        public async Task<IActionResult> AddInventoryAsync(Model.DTO.AddManagerRequest addmanagerRequest)
+        public async Task<IActionResult> AddManagerAsync(Model.DTO.AddManagerRequest addmanagerRequest)
         {
 
             // first convert Request(DTO) to domain model
             var manager = new Model.Domain.Manager()
             {
-               manager_name=addmanagerRequest.manager_name,
+                manager_name = addmanagerRequest.manager_name,
 
-               address = addmanagerRequest.address,
+                address = addmanagerRequest.address,
 
-               salary = addmanagerRequest.salary
+                salary = addmanagerRequest.salary
 
             };
 
@@ -119,7 +130,7 @@ namespace HotelManagementProjectfeb.Controllers
                 address = manager.address,
 
                 salary = manager.salary
-                
+
             };
 
             //return Ok response
@@ -136,9 +147,10 @@ namespace HotelManagementProjectfeb.Controllers
 
             var manager = new Model.Domain.Manager()
             {
-                manager_name  =updateManagerRequest.manager_name,
-              
+                manager_name = updateManagerRequest.manager_name,
+
                 address = updateManagerRequest.address,
+
                 salary = updateManagerRequest.salary
 
             };
@@ -158,8 +170,8 @@ namespace HotelManagementProjectfeb.Controllers
             {
                 manager_name = manager.manager_name,
                 address = manager.address,
-                salary  =manager.salary
-              
+                salary = manager.salary
+
             };
 
             //Return OK Response
@@ -168,6 +180,6 @@ namespace HotelManagementProjectfeb.Controllers
         }
 
     }
+}
 
-}
-}
+
