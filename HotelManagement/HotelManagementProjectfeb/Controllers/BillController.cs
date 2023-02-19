@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HotelManagementProjectfeb.Model.DTO;
 using HotelManagementProjectfeb.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagementProjectfeb.Controllers
@@ -9,7 +10,8 @@ namespace HotelManagementProjectfeb.Controllers
 
 [ApiController]
 [Route("Bill")]
-public class BillController : Controller
+   [Authorize(Roles = "receptionist,manager,owner")]
+    public class BillController : Controller
 {
 
 
@@ -34,7 +36,7 @@ public class BillController : Controller
 
     [HttpGet]
     //[Authorize]
-    // [Authorize(Roles = "reader")]
+     
 
     public async Task<IActionResult> GetAllBillAsync()
     {
@@ -51,7 +53,7 @@ public class BillController : Controller
     [Route("{id:guid}")]
     [ActionName("GetBillAsync")]
     //[Authorize]
-    //[Authorize(Roles = "reader")]
+    
     public async Task<IActionResult> GetBillAsync(Guid id)
     {
         var billm = await _billRepository.GetAsync(id);
@@ -107,7 +109,7 @@ public class BillController : Controller
     [HttpDelete]
     [Route("{id:guid}")]
     //   [Authorize]
-    //  [Authorize(Roles = "writer")]
+      
     public async Task<IActionResult> DeleteBillAsync(Guid id)
     {
         //Get region from database 
@@ -137,7 +139,8 @@ public class BillController : Controller
     [HttpPut]
     [Route("{id:guid}")]
     // [Authorize]
-    //  [Authorize(Roles = "writer")]
+     
+
     public async Task<IActionResult> UpdateBillAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateBillRequest updatebillRequest)
     {
 

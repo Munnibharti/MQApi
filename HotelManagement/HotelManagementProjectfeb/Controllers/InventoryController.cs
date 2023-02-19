@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HotelManagementProjectfeb.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagementProjectfeb.Controllers
@@ -7,6 +8,7 @@ namespace HotelManagementProjectfeb.Controllers
    
     [ApiController]
     [Route("Inventory")]
+   // [Authorize(Roles ="manager")]
     public class InventoryController : Controller
     {
         //Profiles is basically a way to tell the application that
@@ -30,7 +32,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpGet]
         //[Authorize]
-        // [Authorize(Roles = "reader")]
+      [Authorize(Roles = "manager,owner")]
 
         public async Task<IActionResult> GetAllInventoryAsync()
         {
@@ -47,7 +49,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("GetInventoryAsync")]
         //[Authorize]
-        //[Authorize(Roles = "reader")]
+        [Authorize(Roles = "manager")]
         public async Task<IActionResult> GetInventoryAsync(Guid id)
         {
             var inventorym = await _inventoryRepository.GetAsync(id);
@@ -64,7 +66,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpPost]
         //[Authorize]
-        //[Authorize(Roles = "writer")]
+        [Authorize(Roles = "manager")]
         public async Task<IActionResult> AddInventoryAsync(Model.DTO.AddInventoryRequest addinventoryRequest)
         {
 
@@ -98,7 +100,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpDelete]
         [Route("{id:guid}")]
         //   [Authorize]
-        //  [Authorize(Roles = "writer")]
+          [Authorize(Roles = "manager")]
         public async Task<IActionResult> DeleteInventoryAsync(Guid id)
         {
             //Get region from database 
@@ -128,7 +130,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpPut]
         [Route("{id:guid}")]
         // [Authorize]
-        //  [Authorize(Roles = "writer")]
+         [Authorize(Roles = "manager")]
         public async Task<IActionResult> UpdateInventoryAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateInventoryRequest updateInventoryRequest)
         {
 

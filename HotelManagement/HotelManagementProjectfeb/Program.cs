@@ -1,7 +1,10 @@
 using FluentValidation.AspNetCore;
 using HotelManagementProjectfeb.Data;
 using HotelManagementProjectfeb.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,12 +47,27 @@ builder.Services.AddScoped<IInventoryRepositorycs, InventoryRepository>();
 
 builder.Services.AddScoped<IManagerRepository, ManagerRepository>();
 
+builder.Services.AddSingleton<IUserRepository, StaticUserRepository>();
+
+builder.Services.AddScoped<ITokenHandler, HotelManagementProjectfeb.Repositories.TokenHandler>();
 //here dependency injection
 
 //here automapper
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    });
 
 var app = builder.Build();
 
@@ -66,7 +84,7 @@ app.UseHttpsRedirection();
 
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

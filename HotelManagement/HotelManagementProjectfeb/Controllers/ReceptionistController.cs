@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 using HotelManagementProjectfeb.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagementProjectfeb.Controllers
 {
   
 
-
-
-
-
 [ApiController]
 [Route("Receptionist")]
+
+
 public class ReceptionistController : Controller
 {
 
@@ -36,7 +35,7 @@ public class ReceptionistController : Controller
 
     [HttpGet]
     //[Authorize]
-    // [Authorize(Roles = "reader")]
+    [Authorize(Roles = "manager,owner")]
 
     public async Task<IActionResult> GetAllReceptionistAsync()
     {
@@ -53,7 +52,7 @@ public class ReceptionistController : Controller
     [Route("{id:guid}")]
     [ActionName("GetReceptionistAsync")]
     //[Authorize]
-    //[Authorize(Roles = "reader")]
+    [Authorize(Roles = "manager,owner")]
     public async Task<IActionResult> GetReceptionistAsync(Guid id)
     {
         var receptionist = await _receptionistRepository.GetAsync(id);
@@ -70,7 +69,7 @@ public class ReceptionistController : Controller
 
     [HttpPost]
     //[Authorize]
-    //[Authorize(Roles = "writer")]
+    [Authorize(Roles = "manager,owner")]
     public async Task<IActionResult> AddReceptionistAsync(Model.DTO.AddReceptionistRequest addReceptionistRequest)
     {
 
@@ -110,7 +109,7 @@ public class ReceptionistController : Controller
     [HttpDelete]
     [Route("{id:guid}")]
     //   [Authorize]
-    //  [Authorize(Roles = "writer")]
+      [Authorize(Roles = "manager,owner")]
     public async Task<IActionResult> DeleteReceptionistAsync(Guid id)
     {
         //Get region from database 
@@ -141,7 +140,7 @@ public class ReceptionistController : Controller
     [HttpPut]
     [Route("{id:guid}")]
     // [Authorize]
-    //  [Authorize(Roles = "writer")]
+     [Authorize(Roles = "receptionist,manager,owner")]
     public async Task<IActionResult> UpdateReceptionistAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateReceptionistRequest updatereceptionsitRequest)
     {
 
