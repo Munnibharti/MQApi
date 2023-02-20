@@ -38,7 +38,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpGet]
         [Authorize]
-        [Authorize(Roles = "receptionist,manager,owner")]
+       // [Authorize(Roles = "receptionist,manager,owner")]
 
         public async Task<IActionResult> GetAllGuestAsync()
         {
@@ -69,7 +69,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:Guid}")]
         [ActionName("GetGuestAsync")]
         //[Authorize]
-        [Authorize(Roles = "receptionist")]
+       // [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> GetGuestAsync(Guid id)
         {
             var guestm = await _guestRepository.GetAsync(id);
@@ -86,7 +86,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpPost]
         //[Authorize]
-        [Authorize(Roles = "receptionist")]
+     //   [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> AddGuestAsync(Model.DTO.AddGuestRequest addguestRequest)
         {
 
@@ -123,7 +123,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("DeleteGuestAsync")]
         //   [Authorize]
-          [Authorize(Roles = "receptionist")]
+       //   [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> DeleteGuestAsync(Guid id)
         {
             //Get region from database 
@@ -155,7 +155,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("UpdateGuestAsync")]
         // [Authorize]
-          [Authorize(Roles = "receptionist")]
+         // [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> UpdateGuestAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateGuestRequest updateguestRequest)
         {
 

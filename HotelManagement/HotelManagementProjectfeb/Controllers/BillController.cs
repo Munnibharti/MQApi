@@ -10,7 +10,7 @@ namespace HotelManagementProjectfeb.Controllers
 
 [ApiController]
 [Route("Bill")]
-   [Authorize(Roles = "receptionist,manager,owner")]
+   ///[Authorize(Roles = "receptionist,manager,owner")]
     public class BillController : Controller
 {
 

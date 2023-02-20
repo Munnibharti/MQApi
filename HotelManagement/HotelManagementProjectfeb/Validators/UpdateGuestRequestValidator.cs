@@ -8,6 +8,8 @@ namespace HotelManagementProjectfeb.Validators
             {
                 RuleFor(x => x.E_mail).NotEmpty();
 
+                RuleFor(x => x.Guest_Name).NotEmpty();
+
                 RuleFor(x => x.Gender).NotEmpty();
 
                 RuleFor(x => x.Address).NotEmpty();

@@ -78,6 +78,8 @@ namespace HotelManagementProjectfeb.Repositories
 
             existingguest.E_mail = guest.E_mail;
 
+            existingguest.Guest_Name = guest.Guest_Name;
+
             existingguest.Address = guest.Address;
 
             existingguest.Gender = guest.Gender;

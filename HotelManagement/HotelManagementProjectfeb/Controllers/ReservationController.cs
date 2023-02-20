@@ -32,7 +32,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpGet]
         //[Authorize]
-         [Authorize(Roles = "receptionist,manager,owner")]
+        // [Authorize(Roles = "receptionist,manager,owner")]
 
 
         public async Task<IActionResult> GetAllReservationAsync()
@@ -50,7 +50,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("GetReservationAsync")]
         //[Authorize]
-        [Authorize(Roles = "receptionist,manager")]
+       // [Authorize(Roles = "receptionist,manager")]
         public async Task<IActionResult> GetReservationAsync(Guid id)
         {
             var reservation = await _reservatioRepository.GetAsync(id);
@@ -67,7 +67,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpPost]
         //[Authorize]
-       [Authorize(Roles = "receptionist,manager,owner")]
+      // [Authorize(Roles = "receptionist,manager,owner")]
         public async Task<IActionResult> AddReservationAsync(Model.DTO.AddReservationRequest addReservationRequest)
         {
 
@@ -88,12 +88,9 @@ namespace HotelManagementProjectfeb.Controllers
 
                 no_of_nights = addReservationRequest.no_of_nights,
 
-                Room_id = addReservationRequest.Room_id,
+                Room_id = addReservationRequest.Room_id
 
-                Receptionist_id = addReservationRequest.Recetionist_id
-
-
-            };
+              };
 
             //Pass details to Repository
             reservation = await _reservatioRepository.AddAsync(reservation);
@@ -118,11 +115,9 @@ namespace HotelManagementProjectfeb.Controllers
 
                 Guest_Id = reservation.Guest_Id,
 
-                Room_id = reservation.Room_id,
+                Room_id = reservation.Room_id
 
-                Receptionist_id=reservation.Receptionist_id
-
-            };
+                };
 
             return CreatedAtAction(nameof(GetReservationAsync), new { id = reservationDTO.reservation_id }, reservationDTO);
 
@@ -131,7 +126,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpDelete]
         [Route("{id:guid}")]
         //   [Authorize]
-          [Authorize(Roles = "receptionist,manager")]
+       //   [Authorize(Roles = "receptionist,manager")]
         public async Task<IActionResult> DeleteReservationAsync(Guid id)
         {
             //Get region from database 
@@ -163,10 +158,7 @@ namespace HotelManagementProjectfeb.Controllers
 
                 Guest_Id = reservation.Guest_Id,
 
-                Room_id = reservation.Room_id,
-
-                Receptionist_id = reservation.Receptionist_id,
-
+                Room_id = reservation.Room_id
             };
 
             //return Ok response
@@ -177,7 +169,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpPut]
         [Route("{id:guid}")]
         // [Authorize]
-          [Authorize(Roles = "receptionist,manager,owner")]
+          //[Authorize(Roles = "receptionist,manager,owner")]
         public async Task<IActionResult> UpdateReservationAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateReservationRequest updatereservationRequest)
         {
 
@@ -200,9 +192,7 @@ namespace HotelManagementProjectfeb.Controllers
 
                 Room_id = updatereservationRequest.Room_id,
 
-                Receptionist_id = updatereservationRequest.Receptionist_id
-
-            };
+              };
 
 
             //update region using repository
@@ -231,11 +221,9 @@ namespace HotelManagementProjectfeb.Controllers
 
                 Guest_Id = reservation.Guest_Id,
 
-                Room_id = reservation.Room_id,
+                Room_id = reservation.Room_id
 
-                Receptionist_id = reservation.Receptionist_id
-
-            };
+                 };
 
             //Return OK Response
 

@@ -30,7 +30,7 @@ namespace HotelManagementProjectfeb.Model.DTO
 
 
         public Guid Receptionist_id { get; set; }
-        public List<Receptionist> Receptionists { get; set; }
+       
 
 
     }

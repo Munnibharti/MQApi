@@ -30,8 +30,8 @@ namespace HotelManagementProjectfeb.Model.Domain
         public List<Room> Rooms { get; set; }   
 
 
-        public Guid Receptionist_id { get; set; }
-        public List<Receptionist> Receptionists { get; set; }
+        //public Guid Receptionist_id { get; set; }
+        //public List<Receptionist> Receptionists { get; set; }
         
 
     }

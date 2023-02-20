@@ -22,19 +22,7 @@ namespace HotelManagementProjectfeb.Migrations
                     table.PrimaryKey("PK_Inventories", x => x.Inventory_Id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Managers",
-                columns: table => new
-                {
-                    manager_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    manager_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    salary = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Managers", x => x.manager_id);
-                });
+           
 
             migrationBuilder.CreateTable(
                 name: "Reservations",
@@ -48,8 +36,8 @@ namespace HotelManagementProjectfeb.Migrations
                     status = table.Column<bool>(type: "bit", nullable: false),
                     no_of_nights = table.Column<int>(type: "int", nullable: false),
                     Guest_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Room_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Receptionist_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Room_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                   
                 },
                 constraints: table =>
                 {
@@ -82,6 +70,7 @@ namespace HotelManagementProjectfeb.Migrations
                 {
                     Guest_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     E_mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Guest_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone_number = table.Column<long>(type: "bigint", nullable: false),
@@ -97,26 +86,7 @@ namespace HotelManagementProjectfeb.Migrations
                         principalColumn: "reservation_id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Receptionists",
-                columns: table => new
-                {
-                    Receptionist_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Receptionist_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    salary = table.Column<double>(type: "float", nullable: false),
-                    reservation_id = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Receptionists", x => x.Receptionist_Id);
-                    table.ForeignKey(
-                        name: "FK_Receptionists_Reservations_reservation_id",
-                        column: x => x.reservation_id,
-                        principalTable: "Reservations",
-                        principalColumn: "reservation_id");
-                });
-
+           
             migrationBuilder.CreateTable(
                 name: "Rooms",
                 columns: table => new
@@ -152,11 +122,7 @@ namespace HotelManagementProjectfeb.Migrations
                 table: "Guests",
                 column: "reservation_id");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Receptionists_reservation_id",
-                table: "Receptionists",
-                column: "reservation_id");
-
+           
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_Bill_id",
                 table: "Rooms",
@@ -176,11 +142,6 @@ namespace HotelManagementProjectfeb.Migrations
             migrationBuilder.DropTable(
                 name: "Inventories");
 
-            migrationBuilder.DropTable(
-                name: "Managers");
-
-            migrationBuilder.DropTable(
-                name: "Receptionists");
 
             migrationBuilder.DropTable(
                 name: "Rooms");

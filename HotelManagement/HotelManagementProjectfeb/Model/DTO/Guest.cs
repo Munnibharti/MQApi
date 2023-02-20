@@ -10,6 +10,8 @@ namespace HotelManagementProjectfeb.Model.DTO
     public Guid Guest_id { get; set; }
 
     public string E_mail { get; set; }
+     
+     public string Guest_Name { get; set; }
 
     public string Gender { get; set; }
 

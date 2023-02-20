@@ -25,10 +25,6 @@ namespace HotelManagementProjectfeb.Data
 
         public DbSet<Reservation> Reservations { get; set; }
 
-        public DbSet<Manager> Managers { get; set; }
-
-        public DbSet<Receptionist> Receptionists { get; set; }
-
         public DbSet<Room> Rooms { get; set; }
 
         public DbSet<Inventory> Inventories { get; set; }
@@ -37,7 +33,7 @@ namespace HotelManagementProjectfeb.Data
 
         public DbSet<Guest> Guests { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Staff> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User_Roles> Users_Roles { get; set; }
     }

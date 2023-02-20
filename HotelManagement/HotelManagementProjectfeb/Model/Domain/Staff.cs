@@ -2,14 +2,11 @@
 
 namespace HotelManagementProjectfeb.Model.Domain
 {
-    public class User
+    public class Staff
     {
         public Guid Id { get; set; }
 
         public string UserName { get; set; }
-
-        public string EmailAddress { get; set; }
-
         public string Password { get; set; }
         [NotMapped]
         public List<string> Roles { get; set; }

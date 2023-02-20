@@ -16,14 +16,15 @@ namespace HotelManagementProjectfeb.Repositories
             {
                 this._configuration = configuration;
             }
-            public Task<string> CreateTokenAsync(User user)
-            {
-                 // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-                //create calims
-                var claims = new List<Claim>();
-                claims.Add(new Claim(ClaimTypes.GivenName, user.FirstName));
-                claims.Add(new Claim(ClaimTypes.Surname, user.LastName));
-                claims.Add(new Claim(ClaimTypes.Email, user.EmailAddress));
+        public Task<string> CreateTokenAsync(Staff user)
+        {
+            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            //create calims
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.GivenName, user.FirstName));
+            claims.Add(new Claim(ClaimTypes.Surname, user.LastName));
+            claims.Add(new Claim(ClaimTypes.Email, user.UserName));
+ 
 
                 // Loop into roles of users
                 //here we are doing this for each role claims will create 

@@ -4,6 +4,6 @@ namespace HotelManagementProjectfeb.Repositories
 {
     public interface IUserRepository
     {
-        Task<User> AuthenticateAsync(string username, string password);
+        Task<Staff> AuthenticateAsync(string username, string password);
     }
 }

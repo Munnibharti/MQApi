@@ -4,7 +4,7 @@ namespace HotelManagementProjectfeb.Repositories
 {
     public interface ITokenHandler
     {
-        Task<string> CreateTokenAsync(User user);
+        Task<string> CreateTokenAsync(Staff user);
 
 
     }

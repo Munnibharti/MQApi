@@ -61,14 +61,11 @@ builder.Services.AddScoped<IBillRepository, BillRepository>();
 
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
-builder.Services.AddScoped<IReceptionistRepositories, ReceptionistRepository>();
-
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 builder.Services.AddScoped<IInventoryRepositorycs, InventoryRepository>();
 
-builder.Services.AddScoped<IManagerRepository, ManagerRepository>();
-
+//this is staff repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<ITokenHandler, HotelManagementProjectfeb.Repositories.TokenHandler>();
