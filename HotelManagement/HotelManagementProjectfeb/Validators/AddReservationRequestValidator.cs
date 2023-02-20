@@ -14,7 +14,7 @@ namespace HotelManagementProjectfeb.Validators
 
             RuleFor(x => x.Check_in).GreaterThanOrEqualTo(DateTime.Now);
 
-            RuleFor(x => x.status).NotEmpty();
+            
 
             RuleFor(x => x.no_of_nights).GreaterThanOrEqualTo(1);
 

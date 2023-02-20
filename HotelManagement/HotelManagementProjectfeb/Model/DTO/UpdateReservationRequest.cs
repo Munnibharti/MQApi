@@ -19,6 +19,6 @@
 
         public Guid Room_id { get; set; }
 
-        public Guid Receptionist_id { get; set; }
+     
     }
 }

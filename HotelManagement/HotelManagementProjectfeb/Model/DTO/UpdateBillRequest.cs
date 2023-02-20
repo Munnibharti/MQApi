@@ -7,6 +7,7 @@ namespace HotelManagementProjectfeb.Model.DTO
         public int stay_dates { get; set; }
 
         //room price = adult*1000+child*500 *stay_dates
+        public decimal total_bill { get; set; }
         public Guid Room_id { get; set; }
 
 

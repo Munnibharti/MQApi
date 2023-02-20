@@ -22,14 +22,16 @@ namespace HotelManagementProjectfeb.Model.DTO
 
         public Guid Guest_Id { get; set; }
 
-        public List<Guest> Guests { get; set; }
+        public  Guest Guests { get; set; }
 
         public Guid Room_id { get; set; }
 
-        public List<Room> Rooms { get; set; }
+        public  Room Rooms { get; set; }
+
+        public virtual ICollection<Bill> Bills { get; set; }
 
 
-        public Guid Receptionist_id { get; set; }
+       
        
 
 

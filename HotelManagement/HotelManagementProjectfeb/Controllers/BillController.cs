@@ -35,10 +35,10 @@ namespace HotelManagementProjectfeb.Controllers
 
 
     [HttpGet]
-    //[Authorize]
-     
+        //[Authorize]
 
-    public async Task<IActionResult> GetAllBillAsync()
+        [Authorize(Roles = "receptionist,manager,owner")]
+        public async Task<IActionResult> GetAllBillAsync()
     {
         var bill = await _billRepository.GetAllAsync();
 
@@ -52,9 +52,10 @@ namespace HotelManagementProjectfeb.Controllers
     [HttpGet]
     [Route("{id:guid}")]
     [ActionName("GetBillAsync")]
-    //[Authorize]
-    
-    public async Task<IActionResult> GetBillAsync(Guid id)
+        //[Authorize]
+
+        [Authorize(Roles = "receptionist,manager,owner")]
+        public async Task<IActionResult> GetBillAsync(Guid id)
     {
         var billm = await _billRepository.GetAsync(id);
 
@@ -69,9 +70,9 @@ namespace HotelManagementProjectfeb.Controllers
     }
 
     [HttpPost]
-    //[Authorize]
-    //[Authorize(Roles = "writer")]
-    public async Task<IActionResult> AddBillAsync(Model.DTO.AddBillRequest addbillRequest)
+        //[Authorize]
+        [Authorize(Roles = "receptionist,manager,owner")]
+        public async Task<IActionResult> AddBillAsync(Model.DTO.AddBillRequest addbillRequest)
     {
 
         // first convert Request(DTO) to domain model
@@ -79,6 +80,8 @@ namespace HotelManagementProjectfeb.Controllers
         {
 
             stay_dates = addbillRequest.stay_dates,
+
+            total_bill = addbillRequest.total_bill,
 
             Room_id = addbillRequest.Room_id,
 
@@ -96,6 +99,8 @@ namespace HotelManagementProjectfeb.Controllers
 
             stay_dates = addbillRequest.stay_dates,
 
+            total_bill = addbillRequest.total_bill,
+
             Room_id = addbillRequest.Room_id,
 
             Reservation_id = addbillRequest.Reservation_id,
@@ -108,9 +113,9 @@ namespace HotelManagementProjectfeb.Controllers
 
     [HttpDelete]
     [Route("{id:guid}")]
-    //   [Authorize]
-      
-    public async Task<IActionResult> DeleteBillAsync(Guid id)
+        [Authorize(Roles = "receptionist,manager,owner")]
+
+        public async Task<IActionResult> DeleteBillAsync(Guid id)
     {
         //Get region from database 
 
@@ -126,6 +131,8 @@ namespace HotelManagementProjectfeb.Controllers
         {
             stay_dates = bill.stay_dates,
 
+            total_bill = bill.total_bill,
+
             Room_id = bill.Room_id,
 
             Reservation_id = bill.Reservation_id,
@@ -138,15 +145,17 @@ namespace HotelManagementProjectfeb.Controllers
 
     [HttpPut]
     [Route("{id:guid}")]
-    // [Authorize]
-     
+     [Authorize(Roles = "receptionist,manager,owner")]
 
-    public async Task<IActionResult> UpdateBillAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateBillRequest updatebillRequest)
+
+        public async Task<IActionResult> UpdateBillAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateBillRequest updatebillRequest)
     {
 
         var bill = new Model.Domain.Bill()
         {
             stay_dates = updatebillRequest.stay_dates,
+
+            total_bill = updatebillRequest.total_bill,
 
             Room_id = updatebillRequest.Room_id,
 
@@ -168,6 +177,8 @@ namespace HotelManagementProjectfeb.Controllers
         var billDTO = new Model.DTO.Bill
         {
             stay_dates = bill.stay_dates,
+
+            total_bill = bill.total_bill,
 
             Room_id = bill.Room_id,
 

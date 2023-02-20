@@ -18,6 +18,8 @@ namespace HotelManagementProjectfeb.Model.DTO
     public string Address { get; set; }
 
     public long Phone_number { get; set; }
+   
+    public virtual ICollection<Reservation> Reservations { get; set; }
 
 
  }

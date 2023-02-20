@@ -31,15 +31,26 @@ namespace HotelManagementProjectfeb.Migrations
                     b.Property<Guid>("Reservation_id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("Reservationsreservation_id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("Room_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("Roomsroom_id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("stay_dates")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("total_bill")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Bill_id");
 
-                    b.HasIndex("Reservation_id");
+                    b.HasIndex("Reservationsreservation_id");
+
+                    b.HasIndex("Roomsroom_id");
 
                     b.ToTable("Bills");
                 });
@@ -59,15 +70,13 @@ namespace HotelManagementProjectfeb.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Guest_Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<long>("Phone_number")
                         .HasColumnType("bigint");
 
-                    b.Property<Guid?>("reservation_id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Guest_id");
-
-                    b.HasIndex("reservation_id");
 
                     b.ToTable("Guests");
                 });
@@ -89,51 +98,6 @@ namespace HotelManagementProjectfeb.Migrations
                     b.ToTable("Inventories");
                 });
 
-            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Manager", b =>
-                {
-                    b.Property<Guid>("manager_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("manager_name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("salary")
-                        .HasColumnType("float");
-
-                    b.HasKey("manager_id");
-
-                    b.ToTable("Managers");
-                });
-
-            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Receptionist", b =>
-                {
-                    b.Property<Guid>("Receptionist_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Receptionist_Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("reservation_id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("salary")
-                        .HasColumnType("float");
-
-                    b.HasKey("Receptionist_Id");
-
-                    b.HasIndex("reservation_id");
-
-                    b.ToTable("Receptionists");
-                });
-
             modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Reservation", b =>
                 {
                     b.Property<Guid>("reservation_id")
@@ -149,10 +113,13 @@ namespace HotelManagementProjectfeb.Migrations
                     b.Property<Guid>("Guest_Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Receptionist_id")
+                    b.Property<Guid?>("GuestsGuest_id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("Room_id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("Roomsroom_id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("no_of_adults")
@@ -168,6 +135,10 @@ namespace HotelManagementProjectfeb.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("reservation_id");
+
+                    b.HasIndex("GuestsGuest_id");
+
+                    b.HasIndex("Roomsroom_id");
 
                     b.ToTable("Reservations");
                 });
@@ -192,12 +163,6 @@ namespace HotelManagementProjectfeb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("Bill_id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("reservation_id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<double>("room_rate")
                         .HasColumnType("float");
 
@@ -206,14 +171,10 @@ namespace HotelManagementProjectfeb.Migrations
 
                     b.HasKey("room_id");
 
-                    b.HasIndex("Bill_id");
-
-                    b.HasIndex("reservation_id");
-
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.User", b =>
+            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Staff", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -233,7 +194,7 @@ namespace HotelManagementProjectfeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.User_Roles", b =>
@@ -259,38 +220,32 @@ namespace HotelManagementProjectfeb.Migrations
 
             modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Bill", b =>
                 {
-                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Reservation", "Reservation")
-                        .WithMany()
-                        .HasForeignKey("Reservation_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Reservation", "Reservations")
+                        .WithMany("Bills")
+                        .HasForeignKey("Reservationsreservation_id");
 
-                    b.Navigation("Reservation");
+                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Room", "Rooms")
+                        .WithMany("Bills")
+                        .HasForeignKey("Roomsroom_id");
+
+                    b.Navigation("Reservations");
+
+                    b.Navigation("Rooms");
                 });
 
-            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Guest", b =>
+            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Reservation", b =>
                 {
-                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Reservation", null)
-                        .WithMany("Guests")
-                        .HasForeignKey("reservation_id");
-                });
+                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Guest", "Guests")
+                        .WithMany("Reservations")
+                        .HasForeignKey("GuestsGuest_id");
 
-            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Receptionist", b =>
-                {
-                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Reservation", null)
-                        .WithMany("Receptionists")
-                        .HasForeignKey("reservation_id");
-                });
+                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Room", "Rooms")
+                        .WithMany("Reservations")
+                        .HasForeignKey("Roomsroom_id");
 
-            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Room", b =>
-                {
-                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Bill", null)
-                        .WithMany("Rooms")
-                        .HasForeignKey("Bill_id");
+                    b.Navigation("Guests");
 
-                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Reservation", null)
-                        .WithMany("Rooms")
-                        .HasForeignKey("reservation_id");
+                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.User_Roles", b =>
@@ -301,7 +256,7 @@ namespace HotelManagementProjectfeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelManagementProjectfeb.Model.Domain.User", "User")
+                    b.HasOne("HotelManagementProjectfeb.Model.Domain.Staff", "Staffs")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -309,21 +264,17 @@ namespace HotelManagementProjectfeb.Migrations
 
                     b.Navigation("Role");
 
-                    b.Navigation("User");
+                    b.Navigation("Staffs");
                 });
 
-            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Bill", b =>
+            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Guest", b =>
                 {
-                    b.Navigation("Rooms");
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Reservation", b =>
                 {
-                    b.Navigation("Guests");
-
-                    b.Navigation("Receptionists");
-
-                    b.Navigation("Rooms");
+                    b.Navigation("Bills");
                 });
 
             modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Role", b =>
@@ -331,7 +282,14 @@ namespace HotelManagementProjectfeb.Migrations
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.User", b =>
+            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Room", b =>
+                {
+                    b.Navigation("Bills");
+
+                    b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("HotelManagementProjectfeb.Model.Domain.Staff", b =>
                 {
                     b.Navigation("UserRoles");
                 });

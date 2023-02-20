@@ -20,7 +20,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpPost]
         [Route("login")]
         //we cannot keep here authorize because any one wants to authorize 
-
+       
         public async Task<IActionResult> LoginAsync(Model.DTO.LoginRequest loginRequest)
         {
             //validate the incoming request we have used fluent validation

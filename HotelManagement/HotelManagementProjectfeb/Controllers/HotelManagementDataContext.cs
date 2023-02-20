@@ -18,7 +18,7 @@ namespace HotelManagementProjectfeb.Data
                 .HasForeignKey(x => x.RoleId);
 
             modelBuilder.Entity<User_Roles>()
-                .HasOne(x => x.User)
+                .HasOne(x => x.Staffs)
                 .WithMany(y => y.UserRoles)
                 .HasForeignKey(x => x.UserId);
         }
@@ -33,7 +33,7 @@ namespace HotelManagementProjectfeb.Data
 
         public DbSet<Guest> Guests { get; set; }
 
-        public DbSet<Staff> Users { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User_Roles> Users_Roles { get; set; }
     }

@@ -15,7 +15,7 @@ namespace HotelManagementProjectfeb.Repositories
 
         public async Task<Staff> AuthenticateAsync(string username, string password)
         {
-            var user = await _db.Users
+            var user = await _db.Staffs
                 .FirstOrDefaultAsync(x => x.UserName.ToLower() == username.ToLower() && x.Password == password);
 
             if (user == null)

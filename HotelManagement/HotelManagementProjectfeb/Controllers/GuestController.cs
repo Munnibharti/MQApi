@@ -37,7 +37,7 @@ namespace HotelManagementProjectfeb.Controllers
 
 
         [HttpGet]
-        [Authorize]
+       // [Authorize]
        // [Authorize(Roles = "receptionist,manager,owner")]
 
         public async Task<IActionResult> GetAllGuestAsync()
@@ -46,19 +46,8 @@ namespace HotelManagementProjectfeb.Controllers
 
             //BY using Auto MApper
             //by 
-            //  var guestsDTO = Mapper.Map<List<Model.DTO.Guest>>(guest);
-            var guestsDTO = new List<GuestDTO>();
-            foreach (var item in guest)
-            {
-
-                var temp = new GuestDTO();
-                temp.Guest_id = item.Guest_id.ToString();
-                temp.E_mail = item.E_mail;
-                temp.Address = item.Address;
-                temp.Gender = item.Gender;
-                temp.Phone_number = item.Phone_number;
-                guestsDTO.Add(temp);
-            }
+             var guestsDTO = Mapper.Map<List<Model.DTO.Guest>>(guest);
+            
                 
             
 
@@ -69,7 +58,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:Guid}")]
         [ActionName("GetGuestAsync")]
         //[Authorize]
-       // [Authorize(Roles = "receptionist")]
+        [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> GetGuestAsync(Guid id)
         {
             var guestm = await _guestRepository.GetAsync(id);
@@ -86,7 +75,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpPost]
         //[Authorize]
-     //   [Authorize(Roles = "receptionist")]
+        [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> AddGuestAsync(Model.DTO.AddGuestRequest addguestRequest)
         {
 
@@ -94,6 +83,7 @@ namespace HotelManagementProjectfeb.Controllers
             var guest = new Model.Domain.Guest()
             {
                 E_mail = addguestRequest.E_mail,
+                Guest_Name=addguestRequest.Guest_Name,
                 Gender = addguestRequest.Gender,
                 Address = addguestRequest.Address,
                 Phone_number = addguestRequest.Phone_number
@@ -109,6 +99,7 @@ namespace HotelManagementProjectfeb.Controllers
             {
                 Guest_id = guest.Guest_id,
                 E_mail = guest.E_mail,
+                Guest_Name=guest.Guest_Name,
                 Gender = guest.Gender,
                 Address = guest.Address,
                 Phone_number = guest.Phone_number
@@ -140,6 +131,7 @@ namespace HotelManagementProjectfeb.Controllers
             {
                 Guest_id = guest.Guest_id,
                 E_mail = guest.E_mail,
+                Guest_Name=guest.Guest_Name,
                 Gender = guest.Gender,
                 Address = guest.Address,
                 Phone_number = guest.Phone_number
@@ -162,6 +154,7 @@ namespace HotelManagementProjectfeb.Controllers
             var guest = new Model.Domain.Guest()
             {
                 E_mail = updateguestRequest.E_mail,
+                Guest_Name=updateguestRequest.Guest_Name,
                 Gender = updateguestRequest.Gender,
                 Address = updateguestRequest.Address,
                 Phone_number = updateguestRequest.Phone_number
@@ -182,6 +175,7 @@ namespace HotelManagementProjectfeb.Controllers
             {
                 Guest_id = guest.Guest_id,
                 E_mail = guest.E_mail,
+                Guest_Name=guest.Guest_Name,
                 Gender = guest.Gender,
                 Address = guest.Address,
                 Phone_number = guest.Phone_number

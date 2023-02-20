@@ -23,16 +23,17 @@ namespace HotelManagementProjectfeb.Model.Domain
        
         public Guid Guest_Id { get; set; }
 
-        public List<Guest> Guests { get; set; }
+        public  Guest Guests { get; set; }
 
         public Guid Room_id { get; set; }
 
-        public List<Room> Rooms { get; set; }   
+        public  Room Rooms { get; set; } 
 
-
-        //public Guid Receptionist_id { get; set; }
-        //public List<Receptionist> Receptionists { get; set; }
+        //here reservation id will be foreign key inside bill table bill table can fetch any 
+        //reservation records
         
+        public virtual ICollection<Bill> Bills { get; set; }
+
 
     }
 }

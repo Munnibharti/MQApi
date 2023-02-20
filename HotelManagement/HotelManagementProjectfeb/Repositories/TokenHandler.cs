@@ -36,14 +36,16 @@ namespace HotelManagementProjectfeb.Repositories
                 //here Jwt:Key must be match with the the jwt key we have useed inside appsettingjson
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                 var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                //var
+            //var
 
-                var token = new JwtSecurityToken(
-                    _configuration["Jwt:Issuer"],
-                    _configuration["Jwt:Audience"],
-                    claims,
-                    expires: DateTime.Now.AddMinutes(15),
-                    signingCredentials: credential);
+            var token = new JwtSecurityToken(
+                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                claims,
+               // expires: DateTime.Now.AddMinutes(15),
+               expires: DateTime.Now.AddDays(1),
+
+                signingCredentials: credential) ;
 
                 return Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
             }

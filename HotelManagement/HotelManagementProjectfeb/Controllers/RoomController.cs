@@ -32,7 +32,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpGet]
         //[Authorize]
-       ///  [Authorize(Roles = "receptionist,manager,owner")]
+         [Authorize(Roles = "receptionist,manager,owner")]
 
 
         public async Task<IActionResult> GetAllRoomAsync()
@@ -50,7 +50,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("GetRoomAsync")]
         //[Authorize]
-      //  [Authorize(Roles = "manager,owner")]
+        [Authorize(Roles = "manager,owner")]
         public async Task<IActionResult> GetRoomAsync(Guid id)
         {
             var room = await _roomRepository.GetAsync(id);
@@ -101,7 +101,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpDelete]
         [Route("{id:guid}")]
         //   [Authorize]
-     ////   [Authorize(Roles = "manager,owner")]
+        [Authorize(Roles = "manager,owner")]
         public async Task<IActionResult> DeleteRoomAsync(Guid id)
         {
             //Get region from database 
@@ -131,7 +131,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpPut]
         [Route("{id:guid}")]
         // [Authorize]
-//[Authorize(Roles = "manager,owner")]
+        [Authorize(Roles = "manager,owner")]
         public async Task<IActionResult> UpdateRoomAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateRoomRequest updateroomRequest)
         {
 
