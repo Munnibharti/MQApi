@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using HotelManagementProjectfeb.Model.Domain;
-using HotelManagementProjectfeb.Model.DTO;
+//using HotelManagementProjectfeb.Model.Domain;
+//using HotelManagementProjectfeb.Model.DTO;
 using HotelManagementProjectfeb.Repositories;
-using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
+//using System.Data;
 
 namespace HotelManagementProjectfeb.Controllers
 {
@@ -12,7 +12,9 @@ namespace HotelManagementProjectfeb.Controllers
     [ApiController]
 
     [Route("Guest")]
-   // [Authorize]
+    //[Authorize]
+    // [Authorize(Roles = "receptionist")]
+
     public class GuestController : Controller
     {
 
@@ -37,8 +39,8 @@ namespace HotelManagementProjectfeb.Controllers
 
 
         [HttpGet]
-       // [Authorize]
-       // [Authorize(Roles = "receptionist,manager,owner")]
+      //  [Authorize]
+     //  [Authorize(Roles = "receptionist")]
 
         public async Task<IActionResult> GetAllGuestAsync()
         {
@@ -58,8 +60,8 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:Guid}")]
         [ActionName("GetGuestAsync")]
         //[Authorize]
-        [Authorize(Roles = "receptionist")]
-        public async Task<IActionResult> GetGuestAsync(Guid id)
+     // [Authorize(Roles = "receptionist")]
+        public async Task<IActionResult> GetGuestAsync([FromRoute]Guid id)
         {
             var guestm = await _guestRepository.GetAsync(id);
 
@@ -75,7 +77,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpPost]
         //[Authorize]
-        [Authorize(Roles = "receptionist")]
+     //   [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> AddGuestAsync(Model.DTO.AddGuestRequest addguestRequest)
         {
 
@@ -105,6 +107,7 @@ namespace HotelManagementProjectfeb.Controllers
                 Phone_number = guest.Phone_number
 
             };
+            //return an HTTP 201 Created response after successfully creating a new guest resource.
 
             return CreatedAtAction(nameof(GetGuestAsync), new { id = guestDTO.Guest_id }, guestDTO);
 
@@ -114,7 +117,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("DeleteGuestAsync")]
         //   [Authorize]
-       //   [Authorize(Roles = "receptionist")]
+       //  [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> DeleteGuestAsync(Guid id)
         {
             //Get region from database 
@@ -147,7 +150,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("UpdateGuestAsync")]
         // [Authorize]
-         // [Authorize(Roles = "receptionist")]
+      //   [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> UpdateGuestAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateGuestRequest updateguestRequest)
         {
 
@@ -186,6 +189,7 @@ namespace HotelManagementProjectfeb.Controllers
 
             return Ok(guestDTO);
         }
+
 
     }
 

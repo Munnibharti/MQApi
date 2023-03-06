@@ -12,7 +12,7 @@ namespace HotelManagementProjectfeb.Validators
 
             RuleFor(x => x.Check_out).GreaterThanOrEqualTo(DateTime.Now);
 
-            RuleFor(x => x.Check_in).GreaterThanOrEqualTo(DateTime.Now);
+           RuleFor(x => x.Check_in).GreaterThanOrEqualTo(DateTime.Now);
 
             
 

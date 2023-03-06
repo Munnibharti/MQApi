@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HotelManagementProjectfeb.Repositories;
-using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagementProjectfeb.Controllers
@@ -32,7 +32,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpGet]
         //[Authorize]
-      //[Authorize(Roles = "manager,owner")]
+     // [Authorize(Roles = "manager")]
 
         public async Task<IActionResult> GetAllInventoryAsync()
         {
@@ -66,7 +66,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpPost]
         //[Authorize]
-      //  [Authorize(Roles = "manager")]
+     //  [Authorize(Roles = "manager")]
         public async Task<IActionResult> AddInventoryAsync(Model.DTO.AddInventoryRequest addinventoryRequest)
         {
 
@@ -100,7 +100,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpDelete]
         [Route("{id:guid}")]
         //   [Authorize]
-       //   [Authorize(Roles = "manager")]
+      //   [Authorize(Roles = "manager")]
         public async Task<IActionResult> DeleteInventoryAsync(Guid id)
         {
             //Get region from database 

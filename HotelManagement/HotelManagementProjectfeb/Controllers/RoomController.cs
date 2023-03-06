@@ -1,13 +1,19 @@
 ﻿using AutoMapper;
+using HotelManagementProjectfeb.Data;
+using HotelManagementProjectfeb.Model.Domain;
 using HotelManagementProjectfeb.Repositories;
-using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+//using System.Linq;
 
 namespace HotelManagementProjectfeb.Controllers
 {
 
     [ApiController]
     [Route("Room")]
+    
+
     public class RoomController : Controller
 
     {
@@ -16,23 +22,26 @@ namespace HotelManagementProjectfeb.Controllers
         //DTO=DAta transfer object this for converting
         // [Authorize]
         //The authorize attribute means the client must have valid token to access this
-
+        private HotelManagementDataContext _db;
+        private Room room;
         private readonly IRoomRepository _roomRepository;
 
         private readonly IMapper Mapper;
 
 
-        public RoomController(IRoomRepository roomRepository, IMapper mapper)
+        public RoomController(IRoomRepository roomRepository, IMapper mapper,HotelManagementDataContext db)
         {
             this._roomRepository = roomRepository;
 
             this.Mapper = mapper;
+
+            _db = db;
         }
 
 
         [HttpGet]
         //[Authorize]
-         [Authorize(Roles = "receptionist,manager,owner")]
+      // [Authorize(Roles = "receptionist")]
 
 
         public async Task<IActionResult> GetAllRoomAsync()
@@ -50,7 +59,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("GetRoomAsync")]
         //[Authorize]
-        [Authorize(Roles = "manager,owner")]
+       // [Authorize(Roles = "manager,owner")]
         public async Task<IActionResult> GetRoomAsync(Guid id)
         {
             var room = await _roomRepository.GetAsync(id);
@@ -68,7 +77,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpPost]
         //[Authorize]
         //[Authorize(Roles = "writer")]
-        [Authorize(Roles = "manager,owner")]
+       // [Authorize(Roles = "manager,owner")]
         public async Task<IActionResult> AddRoomAsync(Model.DTO.AddRoomRequest addRoomRequest)
         {
 
@@ -101,7 +110,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpDelete]
         [Route("{id:guid}")]
         //   [Authorize]
-        [Authorize(Roles = "manager,owner")]
+      //  [Authorize(Roles = "manager,owner")]
         public async Task<IActionResult> DeleteRoomAsync(Guid id)
         {
             //Get region from database 
@@ -122,6 +131,7 @@ namespace HotelManagementProjectfeb.Controllers
                 room_status = room.room_status
 
             };
+          
 
             //return Ok response
             return Ok(roomDTO);
@@ -131,7 +141,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpPut]
         [Route("{id:guid}")]
         // [Authorize]
-        [Authorize(Roles = "manager,owner")]
+       // [Authorize(Roles = "manager,owner")]
         public async Task<IActionResult> UpdateRoomAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateRoomRequest updateroomRequest)
         {
 
@@ -165,6 +175,17 @@ namespace HotelManagementProjectfeb.Controllers
             //Return OK Response
 
             return Ok(roomDTO);
+        }
+        [HttpGet]
+        [Route("{room_status:bool}")]
+        public async Task<IActionResult> SearchRoom(bool room_status)
+        {
+            var existingroom = await _db.Rooms.FirstOrDefaultAsync(x => x.room_status == room_status);
+
+            if (existingroom == null)
+            { return NotFound(); }
+            else
+                return Ok(existingroom);
         }
 
     }

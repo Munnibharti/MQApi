@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HotelManagementProjectfeb.Model.DTO;
+//using HotelManagementProjectfeb.Model.DTO;
 using HotelManagementProjectfeb.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +10,7 @@ namespace HotelManagementProjectfeb.Controllers
 
 [ApiController]
 [Route("Bill")]
-   ///[Authorize(Roles = "receptionist,manager,owner")]
+  // [Authorize(Roles = "receptionist")]
     public class BillController : Controller
 {
 
@@ -37,7 +37,7 @@ namespace HotelManagementProjectfeb.Controllers
     [HttpGet]
         //[Authorize]
 
-        [Authorize(Roles = "receptionist,manager,owner")]
+       [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> GetAllBillAsync()
     {
         var bill = await _billRepository.GetAllAsync();
@@ -54,7 +54,7 @@ namespace HotelManagementProjectfeb.Controllers
     [ActionName("GetBillAsync")]
         //[Authorize]
 
-        [Authorize(Roles = "receptionist,manager,owner")]
+        [Authorize(Roles = "manager")]
         public async Task<IActionResult> GetBillAsync(Guid id)
     {
         var billm = await _billRepository.GetAsync(id);
@@ -71,7 +71,7 @@ namespace HotelManagementProjectfeb.Controllers
 
     [HttpPost]
         //[Authorize]
-        [Authorize(Roles = "receptionist,manager,owner")]
+       // [Authorize(Roles = "receptionist,manager,owner")]
         public async Task<IActionResult> AddBillAsync(Model.DTO.AddBillRequest addbillRequest)
     {
 
@@ -113,7 +113,7 @@ namespace HotelManagementProjectfeb.Controllers
 
     [HttpDelete]
     [Route("{id:guid}")]
-        [Authorize(Roles = "receptionist,manager,owner")]
+   // [Authorize(Roles = "receptionist,manager,owner")]
 
         public async Task<IActionResult> DeleteBillAsync(Guid id)
     {
@@ -145,7 +145,7 @@ namespace HotelManagementProjectfeb.Controllers
 
     [HttpPut]
     [Route("{id:guid}")]
-     [Authorize(Roles = "receptionist,manager,owner")]
+     [Authorize(Roles = "receptionist")]
 
 
         public async Task<IActionResult> UpdateBillAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateBillRequest updatebillRequest)

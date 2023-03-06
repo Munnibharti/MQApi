@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HotelManagementProjectfeb.Repositories;
-using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagementProjectfeb.Controllers
@@ -32,7 +32,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpGet]
         //[Authorize]
-        [Authorize(Roles = "receptionist,manager,owner")]
+      //  [Authorize(Roles = "receptionist")]
 
 
         public async Task<IActionResult> GetAllReservationAsync()
@@ -50,7 +50,7 @@ namespace HotelManagementProjectfeb.Controllers
         [Route("{id:guid}")]
         [ActionName("GetReservationAsync")]
         //[Authorize]
-        [Authorize(Roles = "receptionist,manager")]
+      //  [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> GetReservationAsync(Guid id)
         {
             var reservation = await _reservatioRepository.GetAsync(id);
@@ -67,7 +67,7 @@ namespace HotelManagementProjectfeb.Controllers
 
         [HttpPost]
         //[Authorize]
-       [Authorize(Roles = "receptionist,manager,owner")]
+    //  [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> AddReservationAsync(Model.DTO.AddReservationRequest addReservationRequest)
         {
 
@@ -126,7 +126,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpDelete]
         [Route("{id:guid}")]
         //   [Authorize]
-        [Authorize(Roles = "receptionist,manager")]
+       // [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> DeleteReservationAsync(Guid id)
         {
             //Get region from database 
@@ -169,7 +169,7 @@ namespace HotelManagementProjectfeb.Controllers
         [HttpPut]
         [Route("{id:guid}")]
         // [Authorize]
-          [Authorize(Roles = "receptionist,manager,owner")]
+       //   [Authorize(Roles = "receptionist")]
         public async Task<IActionResult> UpdateReservationAsync([FromRoute] Guid id, [FromBody] Model.DTO.UpdateReservationRequest updatereservationRequest)
         {
 

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using HotelManagementProjectfeb.Model.Domain;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HotelManagementProjectfeb.Model.Domain
+namespace HotelManagementProjectfeb.Model.DTO
 {
     public class Staff
     {
@@ -11,7 +11,7 @@ namespace HotelManagementProjectfeb.Model.Domain
         public string Password { get; set; }
         [NotMapped]
         // represents the roles assigned to the user
-     //   [NotMapped] attribute, which means that it is not mapped to a database column.
+        //   [NotMapped] attribute, which means that it is not mapped to a database column.
         public List<string> Roles { get; set; }
 
         public string FirstName { get; set; }

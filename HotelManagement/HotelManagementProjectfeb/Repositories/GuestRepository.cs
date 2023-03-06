@@ -92,6 +92,7 @@ namespace HotelManagementProjectfeb.Repositories
 
         }
 
+
     }
 }
 

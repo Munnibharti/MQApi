@@ -1,17 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using HotelManagementProjectfeb.Model.Domain;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HotelManagementProjectfeb.Model.Domain
+namespace HotelManagementProjectfeb.Model.DTO
 {
-    public class Staff
+    public class UpdateStaffRequest
     {
-        public Guid Id { get; set; }
-
         public string UserName { get; set; }
         public string Password { get; set; }
         [NotMapped]
         // represents the roles assigned to the user
-     //   [NotMapped] attribute, which means that it is not mapped to a database column.
+        //   [NotMapped] attribute, which means that it is not mapped to a database column.
         public List<string> Roles { get; set; }
 
         public string FirstName { get; set; }
@@ -20,6 +18,5 @@ namespace HotelManagementProjectfeb.Model.Domain
 
         //Navigation property
         public List<User_Roles> UserRoles { get; set; }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HotelManagementProjectfeb.Model.Domain;
+//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagementProjectfeb.Data
@@ -36,6 +37,10 @@ namespace HotelManagementProjectfeb.Data
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User_Roles> Users_Roles { get; set; }
+
+        
+
+        
     }
 
 

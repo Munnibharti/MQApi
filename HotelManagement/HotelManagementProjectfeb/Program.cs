@@ -34,6 +34,7 @@ builder.Services.AddSwaggerGen(options =>
     };
 
     options.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+    
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {securityScheme, new string[] {} }
@@ -48,6 +49,8 @@ builder.Services.AddDbContext<HotelManagementDataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 });
+
+
 
 //This is necessary for navigation proprerty
 builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
@@ -102,7 +105,7 @@ app.UseHttpsRedirection();
 //its means allowing api to talk to 
 
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
